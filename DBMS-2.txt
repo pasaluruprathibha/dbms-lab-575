@@ -1,0 +1,367 @@
+SQL> SHOW USER;
+USER is "CSE575"
+SQL> SET SQLP "_USER'@'_CONNECT_IDENTIFIER_DATE>"
+CSE575@_CONNECT_IDENTIFIER_DATE>SET SQLP "_USER'@'_CONNECT_IDENTIFIER _DATE>"
+CSE575@XE 05-OCT-23>CREATE TABLE persons(
+  2  person_id NUMBER PRIMARY KEY,
+  3  First_name VARCHAR2(50) NOT NULL,
+  4  Last_name VARCHAR2(50) NOT NULL,
+  5  phone_no NUMBER(10) NOT NULL
+  6  );
+CREATE TABLE persons(
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+CSE575@XE 05-OCT-23>ED
+Wrote file afiedt.buf
+
+  1  CREATE TABLE person(
+  2  person_id NUMBER PRIMARY KEY,
+  3  First_name VARCHAR2(50) NOT NULL,
+  4  Last_name VARCHAR2(50) NOT NULL,
+  5  phone_no NUMBER(10) NOT NULL
+  6* )
+CSE575@XE 05-OCT-23>run
+  1  CREATE TABLE person(
+  2  person_id NUMBER PRIMARY KEY,
+  3  First_name VARCHAR2(50) NOT NULL,
+  4  Last_name VARCHAR2(50) NOT NULL,
+  5  phone_no NUMBER(10) NOT NULL
+  6* )
+
+Table created.
+
+CSE575@XE 05-OCT-23>DESC person;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PERSON_ID                                 NOT NULL NUMBER
+ FIRST_NAME                                NOT NULL VARCHAR2(50)
+ LAST_NAME                                 NOT NULL VARCHAR2(50)
+ PHONE_NO                                  NOT NULL NUMBER(10)
+
+CSE575@XE 05-OCT-23>INSERT INTO person(person_id,first_name,last_name,phone_no) VALUES(1,'Karthik','Krishna',6300076504);
+
+1 row created.
+
+CSE575@XE 05-OCT-23>INSERT INTO person(person_id,first_name,last_name,phone_no) VALUES(2,'Ravi teja','Meghanath',9182823701);
+
+1 row created.
+
+CSE575@XE 05-OCT-23>INSERT INTO person(person_id,first_name,last_name,phone_no) VALUES(3,'RAM','Nagendra',7780762086);
+
+1 row created.
+
+CSE575@XE 05-OCT-23>SELECT * FROM person;
+
+ PERSON_ID FIRST_NAME                                                           
+---------- --------------------------------------------------                   
+LAST_NAME                                            PHONE_NO                   
+-------------------------------------------------- ----------                   
+         1 Karthik                                                             
+Krishna                                            6300076504                 
+                                                                                
+         2 Ravi teja                                                                 
+Meghanath                                         9182823701                  
+                                                                                
+         3 RAM                                                                  
+Ram                                            7780762086                   
+                                                                                
+
+CSE575@XE 05-OCT-23>SET LIN200
+CSE575@XE 05-OCT-23>SELECT * FROM person;
+
+ PERSON_ID FIRST_NAME                                         LAST_NAME                                            PHONE_NO                                                                             
+---------- -------------------------------------------------- -------------------------------------------------- ----------                                                                             
+         1 Suresh                                             Krishna                                            7382790163                                                                             
+         2 JHON                                               Cristofer                                          8548585678                                                                             
+         3 RAM                                                SHANKAR                                            8548585678                                                                             
+
+CSE575@XE 05-OCT-23>CREATE TABLE discounts(
+  2  discount_id NUMBER PRIMARY KEY,
+  3  discount_name VARCHAR2(50) NOT NULL,
+  4  offer(percent) NUMBER(4,2),
+  5  start_date DATE NOT NULL,
+  6  end_date DATE NOT NULL,
+  7  check(end_date>start_date)
+  8  );
+offer(percent) NUMBER(4,2),
+     *
+ERROR at line 4:
+ORA-00902: invalid datatype 
+
+
+CSE575@XE 05-OCT-23>)ed
+SP2-0042: unknown command ")ed" - rest of line ignored.
+CSE575@XE 05-OCT-23>ed
+Wrote file afiedt.buf
+
+  1  CREATE TABLE discounts(
+  2  discount_id NUMBER PRIMARY KEY,
+  3  discount_name VARCHAR2(50) NOT NULL,
+  4  offer NUMBER(4,2),
+  5  start_date DATE NOT NULL,
+  6  end_date DATE NOT NULL,
+  7  check(end_date>start_date)
+  8* )
+CSE575@XE 05-OCT-23>run
+  1  CREATE TABLE discounts(
+  2  discount_id NUMBER PRIMARY KEY,
+  3  discount_name VARCHAR2(50) NOT NULL,
+  4  offer NUMBER(4,2),
+  5  start_date DATE NOT NULL,
+  6  end_date DATE NOT NULL,
+  7  check(end_date>start_date)
+  8* )
+
+Table created.
+
+CSE575@XE 05-OCT-23>DESC discounts
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ DISCOUNT_ID                                                                                                       NOT NULL NUMBER
+ DISCOUNT_NAME                                                                                                     NOT NULL VARCHAR2(50)
+ OFFER                                                                                                                      NUMBER(4,2)
+ START_DATE                                                                                                        NOT NULL DATE
+ END_DATE                                                                                                          NOT NULL DATE
+
+CSE575@XE 05-OCT-23>INSERT INTO discounts VALUES (1,'Diwali sales',15.5,DATE'2023-11-10',DATE'2023-11-15');
+
+1 row created.
+
+CSE575@XE 05-OCT-23>INSERT INTO discounts VALUES (2,'NEW YEAR sales',12,DATE'2023-12-28',DATE'2024-01-05');
+
+1 row created.
+
+CSE575@XE 05-OCT-23>SELECT * FROM discounts;
+
+DISCOUNT_ID DISCOUNT_NAME                                           OFFER START_DAT END_DATE                                                                                                            
+----------- -------------------------------------------------- ---------- --------- ---------                                                                                                           
+          1 Diwali sales                                             15.5 10-NOV-23 15-NOV-23                                                                                                           
+          2 NEW YEAR sales                                             12 28-DEC-23 05-JAN-24                                                                                                           
+
+CSE575@XE 05-OCT-23>CREATE TABLE original_bill(
+  2      produCt_no NUMBER PRIMARY KEY,
+  3      product_name VARCHAR2(110) NOT NULL,
+  4      quantity NUMBER NOT NULL,
+  5      cost NUMBER(10,2) NOT NULL
+  6  );
+
+Table created.
+
+CSE575@XE 05-OCT-23>DESC original_bill;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ PRODUCT_NO                                                                                                        NOT NULL NUMBER
+ PRODUCT_NAME                                                                                                      NOT NULL VARCHAR2(110)
+ QUANTITY                                                                                                          NOT NULL NUMBER
+ COST                                                                                                              NOT NULL NUMBER(10,2)
+
+CSE575@XE 05-OCT-23>INSERT ALL
+  2  INTO original_bill(product_no,product_name,quantity,cost) VALUES(1,'ABC',2,29.9)
+  3  INTO original_bill(product_no,product_name,quantity,cost) VALUES(2,'AB34',5,89)
+  4  INTO original_bill(product_no,product_name,quantity,cost) VALUES(3,'JK98',1,75)
+  5  INTO original_bill(product_no,product_name,quantity,cost) VALUES(4,'KL77',2,99)
+  6  INTO original_bill(product_no,product_name,quantity,cost) VALUES(5,'NM87',1,50)
+  7  SELECT * FROM dual;
+
+5 rows created.
+
+CSE575@XE 05-OCT-23>SELECT * FROM original_bill;
+
+PRODUCT_NO PRODUCT_NAME                                                                                                     QUANTITY       COST                                                         
+---------- -------------------------------------------------------------------------------------------------------------- ---------- ----------                                                         
+         1 ABC                                                                                                                     2       29.9                                                         
+         2 AB34                                                                                                                    5         89                                                         
+         3 JK98                                                                                                                    1         75                                                         
+         4 KL77                                                                                                                    2         99                                                         
+         5 NM87                                                                                                                    1         50                                                         
+
+CSE575@XE 05-OCT-23>CREATE TABLE copy_bill(
+  2  product_no NUMBER PRIMARY KEY,
+  3   product_name VARCHAR2(110) NOT NULL,
+  4    4      quantity NUMBER NOT NULL,
+  5    5      cost NUMBER(10,2) NOT NULL
+  6  
+CSE575@XE 05-OCT-23>CREATE TABLE copy_bill(
+  2  product_no NUMBER PRIMARY KEY,
+  3  product_name VARCHAR2(50) NOT NULL,
+  4  quantity NUMBER NOT NULL,
+  5      cost NUMBER(10,2) NOT NULL
+  6  );
+
+Table created.
+
+CSE575@XE 05-OCT-23>INSERT INTO copy_bill
+  2  SELECT * FROM original_bill;
+
+5 rows created.
+
+CSE575@XE 05-OCT-23>DESC copy_bill;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ PRODUCT_NO                                                                                                        NOT NULL NUMBER
+ PRODUCT_NAME                                                                                                      NOT NULL VARCHAR2(50)
+ QUANTITY                                                                                                          NOT NULL NUMBER
+ COST                                                                                                              NOT NULL NUMBER(10,2)
+
+CSE575@XE 05-OCT-23>SELECT * FROM copy_bill;
+
+PRODUCT_NO PRODUCT_NAME                                         QUANTITY       COST                                                                                                                     
+---------- -------------------------------------------------- ---------- ----------                                                                                                                     
+         1 ABC                                                         2       29.9                                                                                                                     
+         2 AB34                                                        5         89                                                                                                                     
+         3 JK98                                                        1         75                                                                                                                     
+         4 KL77                                                        2         99                                                                                                                     
+         5 NM87                                                        1         50                                                                                                                     
+
+CSE575@XE 05-OCT-23>UPDATE copy_bill
+  2  SET cost=70
+  3  WHERE product_no=1;
+
+1 row updated.
+
+CSE575@XE 05-OCT-23>SELECT * FROM copy_bill WHERE product_no=1;
+
+PRODUCT_NO PRODUCT_NAME                                         QUANTITY       COST                                                                                                                     
+---------- -------------------------------------------------- ---------- ----------                                                                                                                     
+         1 ABC                                                         2         70                                                                                                                     
+
+CSE575@XE 05-OCT-23>UPDATE copy_bill
+  2  SET quantity=5,COST=33.99
+  3  WHERE product_no=1;
+
+1 row updated.
+
+CSE575@XE 05-OCT-23>SELECT * FROM copy_bill WHERE product_no=1;
+
+PRODUCT_NO PRODUCT_NAME                                         QUANTITY       COST                                                                                                                     
+---------- -------------------------------------------------- ---------- ----------                                                                                                                     
+         1 ABC                                                         5      33.99                                                                                                                     
+
+CSE575@XE 05-OCT-23>SELECT * FROM copy_bill;
+
+PRODUCT_NO PRODUCT_NAME                                         QUANTITY       COST                                                                                                                     
+---------- -------------------------------------------------- ---------- ----------                                                                                                                     
+         1 ABC                                                         5      33.99                                                                                                                     
+         2 AB34                                                        5         89                                                                                                                     
+         3 JK98                                                        1         75                                                                                                                     
+         4 KL77                                                        2         99                                                                                                                     
+         5 NM87                                                        1         50                                                                                                                     
+
+CSE575@XE 05-OCT-23>UPDATE copy_bill SET cost=cost*1.5;
+
+5 rows updated.
+
+CSE575@XE 05-OCT-23>SELECT * FROM copy_bill;
+
+PRODUCT_NO PRODUCT_NAME                                         QUANTITY       COST                                                                                                                     
+---------- -------------------------------------------------- ---------- ----------                                                                                                                     
+         1 ABC                                                         5      50.99                                                                                                                     
+         2 AB34                                                        5      133.5                                                                                                                     
+         3 JK98                                                        1      112.5                                                                                                                     
+         4 KL77                                                        2      148.5                                                                                                                     
+         5 NM87                                                        1         75                                                                                                                     
+
+CSE575@XE 05-OCT-23>DELETE FROM copy_bill WHERE cost=50.99;
+
+1 row deleted.
+
+CSE575@XE 05-OCT-23>SELECT * FROM copy_bill;
+
+PRODUCT_NO PRODUCT_NAME                                         QUANTITY       COST                                                                                                                     
+---------- -------------------------------------------------- ---------- ----------                                                                                                                     
+         2 AB34                                                        5      133.5                                                                                                                     
+         3 JK98                                                        1      112.5                                                                                                                     
+         4 KL77                                                        2      148.5                                                                                                                     
+         5 NM87                                                        1         75                                                                                                                     
+
+CSE575@XE 05-OCT-23>DELETE FROM copy_bill WHERE cost>120;
+
+2 rows deleted.
+
+CSE575@XE 05-OCT-23>SELECT * FROM copy_bill;
+
+PRODUCT_NO PRODUCT_NAME                                         QUANTITY       COST                                                                                                                     
+---------- -------------------------------------------------- ---------- ----------                                                                                                                     
+         3 JK98                                                        1      112.5                                                                                                                     
+         5 NM87                                                        1         75                                                                                                                     
+
+CSE575@XE 05-OCT-23>CREATE TABLE dept(
+  2      dep_id NUMBER PRIMARY KEY,
+  3      dep_name VARCHAR2(10) NOT NULL,
+  4      dep_description VARCHAR2(100) NOT NULL
+  5  );
+
+Table created.
+
+CSE575@XE 05-OCT-23>INSERT ALL
+  2  INTO dept VALUES (01,'CSE','Computer Science')
+  3  INTO dept VALUES (02,'CSM','Machine Learning')
+  4  INTO dept VALUES (03,'CSD','Data Science')
+  5  INTO dept VALUES (04,'ECE','Electronics communication')
+  6  INTO dept VALUES (05,'EEE','Electrial')
+  7  INTO dept VALUES (06,'CE','Civil')
+  8  INTO dept VALUES (07,'ME','Mechanical')
+  9  SELECT * FROM dual ;
+
+7 rows created.
+
+CSE575@XE 05-OCT-23>SELECT * FROM dept;
+
+    DEP_ID DEP_NAME   DEP_DESCRIPTION                                                                                                                                                                   
+---------- ---------- ----------------------------------------------------------------------------------------------------                                                                              
+         1 CSE        Computer Science                                                                                                                                                                  
+         2 CSM        Machine Learning                                                                                                                                                                  
+         3 CSD        Data Science                                                                                                                                                                      
+         4 ECE        Electronics communication                                                                                                                                                         
+         5 EEE        Electrial                                                                                                                                                                         
+         6 CE         Civil                                                                                                                                                                             
+         7 ME         Mechanical                                                                                                                                                                        
+
+7 rows selected.
+
+CSE575@XE 05-OCT-23>SELECT dep_name from dept;
+
+DEP_NAME                                                                                                                                                                                                
+----------                                                                                                                                                                                              
+CSE                                                                                                                                                                                                     
+CSM                                                                                                                                                                                                     
+CSD                                                                                                                                                                                                     
+ECE                                                                                                                                                                                                     
+EEE                                                                                                                                                                                                     
+CE                                                                                                                                                                                                      
+ME                                                                                                                                                                                                      
+
+7 rows selected.
+
+CSE575@XE 05-OCT-23>SELECT dep_name,dep_description from dept;
+
+DEP_NAME   DEP_DESCRIPTION                                                                                                                                                                              
+---------- ----------------------------------------------------------------------------------------------------                                                                                         
+CSE        Computer Science                                                                                                                                                                             
+CSM        Machine Learning                                                                                                                                                                             
+CSD        Data Science                                                                                                                                                                                 
+ECE        Electronics communication                                                                                                                                                                    
+EEE        Electrial                                                                                                                                                                                    
+CE         Civil                                                                                                                                                                                        
+ME         Mechanical                                                                                                                                                                                   
+
+7 rows selected.
+
+CSE575@XE 05-OCT-23>SELECT * FROM dept;
+
+    DEP_ID DEP_NAME   DEP_DESCRIPTION                                                                                                                                                                   
+---------- ---------- ----------------------------------------------------------------------------------------------------                                                                              
+         1 CSE        Computer Science                                                                                                                                                                  
+         2 CSM        Machine Learning                                                                                                                                                                  
+         3 CSD        Data Science                                                                                                                                                                      
+         4 ECE        Electronics communication                                                                                                                                                         
+         5 EEE        Electrial                                                                                                                                                                         
+         6 CE         Civil                                                                                                                                                                             
+         7 ME         Mechanical                                                                                                                                                                        
+
+7 rows selected.
+
+CSE575@XE 05-OCT-23>spool off
