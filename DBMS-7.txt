@@ -1,0 +1,64 @@
+SQL-CSE575>CREATE TABLE employee(
+  2  ID NUMBER PRIMARY KEY,
+  3  name VARCHAR2(50) NOT NULL,
+  4  gender CHAR NOT NULL,
+  5  salary NUMBER(10,2) NOT NULL
+  6  );
+
+Table created.
+
+SQL-CSE575>INSERT ALL
+  2  INTO employee VALUES (1,'RAJU','M',90000)
+  3  INTO employee VALUES (2,'Balaji','M',95000)
+  4  INTO employee VALUES (3,'Aravind','M',80000)
+  5  INTO employee VALUES (4,'Abhilash','M',100000)
+  6  INTO employee VALUES (5,'Rani','F',85000)
+  7  INTO employee VALUES (6,'Pinky','F',85000)
+  8  SELECT * FROM dual;
+
+6 rows created.
+
+SQL-CSE575>SELECT * FROM employee;
+
+        ID NAME                                               G     SALARY                                                                                                                              
+---------- -------------------------------------------------- - ----------                                                                                                                              
+         1 RAJU                                               M      90000                                                                                                                              
+         2 Balaji                                             M      95000                                                                                                                              
+         3 Aravind                                            M      80000                                                                                                                              
+         4 Abhilash                                           M     100000                                                                                                                              
+         5 Rani                                               F      85000                                                                                                                              
+         6 Pinky                                              F      85000                                                                                                                              
+
+6 rows selected.
+
+SQL-CSE575>SELECT SUM(salary) FROM employee;
+
+SUM(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+     535000                                                                                                                                                                                             
+
+SQL-CSE575>SELECT AVG(salary) FROM employee;
+
+AVG(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+ 89166.6667                                                                                                                                                                                             
+
+SQL-CSE575>SELECT COUNT(salary) FROM employee;
+
+COUNT(SALARY)                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+            6                                                                                                                                                                                           
+
+SQL-CSE575>SELECT MIN(salary) FROM employee;
+
+MIN(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+      80000                                                                                                                                                                                             
+
+SQL-CSE575>SELECT MAX(salary) FROM employee;
+
+MAX(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+     100000                                                                                                                                                                                             
+
+SQL-CSE575>SPOOL OFF
