@@ -1,0 +1,45 @@
+SQL_CSE-575>SET SERVEROUT ON
+SQL_CSE-575>SET VERIFY OFF
+SQL_CSE-575>DECLARE
+  2  n NUMBER;
+  3  flag NUMBER:=1;
+  4  g NUMBER;
+  5  g1 NUMBER;
+  6  BEGIN
+  7  n:=&n;
+  8  g1:=n;
+  9  g:=2;
+ 10  FOR g IN 2..g1/2
+ 11  LOOP
+ 12  IF mod(n,g) = 0
+ 13  THEN
+ 14  flag:=0;
+ 15  EXIT;
+ 16  END IF;
+ 17  END LOOP;
+ 18  IF flag=1
+ 19  THEN
+ 20  DBMS_OUTPUT.PUT_LINE(g1||' is a prime number');
+ 21  ELSE
+ 22  DBMS_OUTPUT.PUT_LINE(g1||' is not a prime number');
+ 23  END IF;
+ 24  END;
+ 25  /
+Enter value for n: 9
+9 is not a prime number                                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL_CSE-575>/
+Enter value for n: 8
+8 is not a prime number                                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL_CSE-575>/
+Enter value for n: 7
+7 is a prime number                                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL_CSE-575>SPOOL OFF
