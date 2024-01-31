@@ -1,0 +1,76 @@
+SQL_CSE-575>CREATE TABLE sailor1(
+  2  id NUMBER PRIMARY KEY,
+  3  name VARCHAR2(50) NOT NULL
+  4  );
+
+Table created.
+
+SQL_CSE-575>CREATE OR REPLACE PROCEDURE insertuser(id IN NUMBER,name IN VARCHAR2)
+  2  AS
+  3  BEGIN
+  4  INSERT INTO sailor1 VALUES(id,name);
+  5  DBMS_OUTPUT.PUT_LINE('Record inserted successfully');
+  6  END;
+  7  /
+
+Procedure created.
+
+SQL_CSE-575>DECLARE
+  2  count NUMBER;
+  3  BEGIN
+  4  insertuser(11,'RANI');
+  5  SELECT COUNT(*) INTO count FROM sailor1;
+  6  DBMS_OUTPUT.PUT_LINE(count||' Record is inserted successfully');
+  7  END;
+  8  /
+DBMS_OUTPUT.PUT_LINE(count||' Record is inserted successfully');
+                     *
+ERROR at line 6:
+ORA-06550: line 6, column 22: 
+PLS-00204: function or pseudo-column 'COUNT' may be used inside a SQL statement 
+only 
+ORA-06550: line 6, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL_CSE-575>ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  co NUMBER;
+  3  BEGIN
+  4  insertuser(11,'RANI');
+  5  SELECT COUNT(*) INTO co FROM sailor1;
+  6  DBMS_OUTPUT.PUT_LINE(co||' Record is inserted successfully');
+  7* END;
+SQL_CSE-575>/
+
+PL/SQL procedure successfully completed.
+
+SQL_CSE-575>SET SERVEROUT ON
+SQL_CSE-575>/
+DECLARE
+*
+ERROR at line 1:
+ORA-00001: unique constraint (C##510.SYS_C008382) violated 
+ORA-06512: at "C##510.INSERTUSER", line 4 
+ORA-06512: at line 4 
+
+
+SQL_CSE-575>ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  co NUMBER;
+  3  BEGIN
+  4  insertuser(10,'Balaji');
+  5  SELECT COUNT(*) INTO co FROM sailor1;
+  6  DBMS_OUTPUT.PUT_LINE(co||' Record is inserted successfully');
+  7* END;
+SQL_CSE-575>/
+Record inserted successfully                                                    
+2 Record is inserted successfully                                               
+
+PL/SQL procedure successfully completed.
+
+SQL_CSE-575>SPOOL OFF
