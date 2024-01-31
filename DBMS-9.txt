@@ -1,0 +1,135 @@
+SQL_CSE-575>CREATE TABLE stud(
+  2  ID NUMBER PRIMARY KEY,
+  3  first_name VARCHAR2
+  4  (25) NOT NULL,
+  5  last_name VARCHAR2(25) NOT NULL
+  6  );
+
+Table created.
+
+SQL_CSE-575>INSERT INTO stud VALUES (111,'ROBERT','JUNIOR');
+
+1 row created.
+
+SQL_CSE-575>INSERT INTO stud VALUES (111,'HARRY','HARRY');
+INSERT INTO stud VALUES (111,'HARRY','HARRY')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (C##510.SYS_C008365) violated 
+
+
+SQL_CSE-575>CREATE TABLE orders(
+  2  id NUMBER PRIMARY KEY,
+  3  order_num NUMBER NOT NULL,
+  4  stud_id NUMBER REFERENCES stud(id)
+  5  );
+
+Table created.
+
+SQL_CSE-575>INSERT INTO orders VALUES (11,2,111);
+
+1 row created.
+
+SQL_CSE-575>INSERT INTO orders VALUES (2011,7,112);
+INSERT INTO orders VALUES (2011,7,112)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (C##510.SYS_C008368) violated - parent key not 
+found 
+
+
+SQL_CSE-575>CREATE TABLE employees(
+  2  id NUMBER PRIMARY KEY,
+  3  name VARCHAR2(50) NOT NULL,
+  4  e_mail VARCHAR2(50) UNIQUE
+  5  );
+
+Table created.
+
+SQL_CSE-575>INSERT INTO employees VALUES (501,'Ramesh','Ramesh510@gmail.com');
+
+1 row created.
+
+SQL_CSE-575>INSERT INTO employees VALUES (1505,'RAMESH K','Ramesh510@gmail.com');
+INSERT INTO employees VALUES (1505,'RAMESH K','Ramesh510@gmail.com')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (C##510.SYS_C008371) violated 
+
+
+SQL_CSE-575>CREATE TABLE order1(
+  2  id NUMBER PRIMARY KEY,
+  3  product_name VARCHAR2(50) NOT NULL,
+  4  quantity NUMBER
+  5  );
+
+Table created.
+
+SQL_CSE-575>INSERT INTO order1 VALUES (1,'ABCD',98);
+
+1 row created.
+
+SQL_CSE-575>INSERT INTO order1 VALUES (4,'',98);
+INSERT INTO order1 VALUES (4,'',98)
+                             *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("C##510"."ORDER1"."PRODUCT_NAME") 
+
+
+SQL_CSE-575>CREATE TABLE parts1(
+  2  part_id NUMBER PRIMARY KEY,
+  3  part_name VARCHAR2(50) NOT NULL,
+  4  buy_price NUMBER(9,2) CHECK(buy_price>0)
+  5  );
+
+Table created.
+
+SQL_CSE-575>INSERT INTO parts1 VALUES (1,'ABCD',788);
+
+1 row created.
+
+SQL_CSE-575>INSERT INTO parts1 VALUES (2,'ABD',-788);
+INSERT INTO parts1 VALUES (2,'ABD',-788)
+*
+ERROR at line 1:
+ORA-02290: check constraint (C##510.SYS_C008375) violated 
+
+
+SQL_CSE-575>CREATE TABLE customers1(
+  2  name VARCHAR2(50) NOT NULL,
+  3  id NUMBER PRIMARY KEY,
+  4  country VARCHAR2(20) DEFAULT 'IND'
+  5  );
+
+Table created.
+
+SQL_CSE-575>INSERT INTO customers1(name,id,country) VALUES ('Ram',1,'AUS');
+
+1 row created.
+
+SQL_CSE-575>INSERT INTO customers1(name,id) VALUES ('Raju',2);
+
+1 row created.
+
+SQL_CSE-575>SELECT * FROM customers1;
+
+NAME                                                       ID                   
+-------------------------------------------------- ----------                   
+COUNTRY                                                                         
+--------------------                                                            
+Ram                                                         1                   
+AUS                                                                             
+                                                                                
+Raju                                                        2                   
+IND                                                                             
+                                                                                
+
+SQL_CSE-575>SET LIN100
+SQL_CSE-575>SELECT * FROM customers1;
+
+NAME                                                       ID COUNTRY                               
+-------------------------------------------------- ---------- --------------------                  
+Ram                                                         1 AUS                                   
+Raju                                                        2 IND                                   
+
+SQL_CSE-575>SPOOL OFF
