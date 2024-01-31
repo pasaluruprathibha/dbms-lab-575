@@ -1,0 +1,138 @@
+SQL-CSE575>CREATE TABLE names(
+  2  first_name VARCHAR2(30
+  3  ) NOT NULL,
+  4  LAST_name VARCHAR2(30) NOT NULL
+  5  );
+
+Table created.
+
+SQL-CSE575>INSERT ALL
+  2  INTO names VALUES ('Antony','Robert')
+  3  INTO names VALUES ('Mark','Antony')
+  4  INTO names VALUES ('Stuart','Smart')
+  5  INTO names VALUES ('Rakesh','k')
+  6  select * from dual;
+
+4 rows created.
+
+SQL-CSE575>SELECT LOWER(first_name) FROM names;
+
+LOWER(FIRST_NAME)                                                                                                                                                                                       
+------------------------------                                                                                                                                                                          
+antony                                                                                                                                                                                                  
+mark                                                                                                                                                                                                    
+stuart                                                                                                                                                                                                  
+rakesh                                                                                                                                                                                                  
+
+SQL-CSE575>SELECT UPPER(first_name) FROM names;
+
+UPPER(FIRST_NAME)                                                                                                                                                                                       
+------------------------------                                                                                                                                                                          
+ANTONY                                                                                                                                                                                                  
+MARK                                                                                                                                                                                                    
+STUART                                                                                                                                                                                                  
+RAKESH                                                                                                                                                                                                  
+
+SQL-CSE575>SELECT INITCAP(first_name) FROM names;
+
+INITCAP(FIRST_NAME)                                                                                                                                                                                     
+------------------------------                                                                                                                                                                          
+Antony                                                                                                                                                                                                  
+Mark                                                                                                                                                                                                    
+Stuart                                                                                                                                                                                                  
+Rakesh                                                                                                                                                                                                  
+
+SQL-CSE575>SELECT CONCAT(first_name,last_name) FROM names;
+
+CONCAT(FIRST_NAME,LAST_NAME)                                                                                                                                                                            
+------------------------------------------------------------                                                                                                                                            
+AntonyRobert                                                                                                                                                                                            
+MarkAntony                                                                                                                                                                                              
+StuartSmart                                                                                                                                                                                             
+Rakeshk                                                                                                                                                                                                 
+
+SQL-CSE575>SELECT SUBSTR(first_name,1,4) FROM names;
+
+SUBSTR(FIRST_NAM                                                                                                                                                                                        
+----------------                                                                                                                                                                                        
+Anto                                                                                                                                                                                                    
+Mark                                                                                                                                                                                                    
+Stua                                                                                                                                                                                                    
+Rake                                                                                                                                                                                                    
+
+SQL-CSE575>SELECT LENGTH(first_name) FROM names;
+
+LENGTH(FIRST_NAME)                                                                                                                                                                                      
+------------------                                                                                                                                                                                      
+                 6                                                                                                                                                                                      
+                 4                                                                                                                                                                                      
+                 6                                                                                                                                                                                      
+                 6                                                                                                                                                                                      
+
+SQL-CSE575>SELECT INSTR(first_name,'Ma') FROM names;
+
+INSTR(FIRST_NAME,'MA')                                                                                                                                                                                  
+----------------------                                                                                                                                                                                  
+                     0                                                                                                                                                                                  
+                     1                                                                                                                                                                                  
+                     0                                                                                                                                                                                  
+                     0                                                                                                                                                                                  
+
+SQL-CSE575>SELECT TRIM(' ' FROM first_name) FROM names;
+
+TRIM(''FROMFIRST_NAME)                                                                                                                                                                                  
+------------------------------                                                                                                                                                                          
+Antony                                                                                                                                                                                                  
+Mark                                                                                                                                                                                                    
+Stuart                                                                                                                                                                                                  
+Rakesh                                                                                                                                                                                                  
+
+SQL-CSE575>SELECT ROUND(11.111,2) FROM dual;
+
+ROUND(11.111,2)                                                                                                                                                                                         
+---------------                                                                                                                                                                                         
+          11.11                                                                                                                                                                                         
+
+SQL-CSE575>SELECT MOD(11,2) FROM dual;
+
+ MOD(11,2)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+
+SQL-CSE575>SELECT SYSDATE FROM dual;
+
+SYSDATE                                                                                                                                                                                                 
+---------                                                                                                                                                                                               
+08-DEC-23                                                                                                                                                                                               
+
+SQL-CSE575>SELECT MONTHS_BETWEEN(SYSDATE,'08-DEC-2024') FROM dual;
+
+MONTHS_BETWEEN(SYSDATE,'08-DEC-2024')                                                                                                                                                                   
+-------------------------------------                                                                                                                                                                   
+                                  -12                                                                                                                                                                   
+
+SQL-CSE575>SELECT ADD_MONTHS(SYSDATE,12) FROM dual;
+
+ADD_MONTH                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+08-DEC-24                                                                                                                                                                                               
+
+SQL-CSE575>SELECT NEXT_DAY(SYSDATE,'MONDAY') FROM dual;
+
+NEXT_DAY(                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+11-DEC-23                                                                                                                                                                                               
+
+SQL-CSE575>SELECT LAST_DAY(SYSDATE) FROM dual;
+
+LAST_DAY(                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+31-DEC-23                                                                                                                                                                                               
+
+SQL-CSE575>SELECT CURRENT_TIMESTAMP(3) FROM dual;
+
+CURRENT_TIMESTAMP(3)                                                                                                                                                                                    
+---------------------------------------------------------------------------                                                                                                                             
+08-DEC-23 11.11.14.747 PM +05:30                                                                                                                                                                        
+
+SQL-CSE575>SPOOL OFF
