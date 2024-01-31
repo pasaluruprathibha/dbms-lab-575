@@ -1,0 +1,109 @@
+SQL_CSE-575>SET SERVEROUT ON
+SQL_CSE-575>SET VERIFY OFF
+SQL_CSE-575>DECLARE
+  2  first_num NUMBER:=0;
+  3  second_num NUMBER:=1;
+  4  n NUMBER;
+  5  i NUMBER;
+  6  temp NUMBER;
+  7  BEGIN
+  8  n:=&n;
+  9  DBMS
+ 10  _OUTPUT.PUT_LINE('SERIES :');
+ 11  DBMS_OUTPUT.PUT_LINE(first_num);
+ 12  DBMS_OUTPUT.PUT_LINE(second_num);
+ 13  FOR i IN 2..N
+ 14  LOOP
+ 15  temp := first_num+second_num;
+ 16  first_num := second_num;
+ 17  second_num := temp;
+ 18  DBMS_OUTPUT.PUT_LINE(temp);
+ 19  END LOOP;
+ 20  END;
+ 21  /
+Enter value for n: 4
+_OUTPUT.PUT_LINE('SERIES :');
+*
+ERROR at line 10:
+ORA-06550: line 10, column 1: 
+PLS-00103: Encountered the symbol "_" when expecting one of the following: 
+:= . ( @ % ; 
+The symbol ":= was inserted before "_" to continue. 
+
+
+SQL_CSE-575>ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  first_num NUMBER:=0;
+  3  second_num NUMBER:=1;
+  4  n NUMBER;
+  5  i NUMBER;
+  6  temp NUMBER;
+  7  BEGIN
+  8  n:=&n;
+  9  DBMS
+ 10  _OUTPUT.PUT_LINE('SERIES :');
+ 11  DBMS_OUTPUT.PUT_LINE(first_num);
+ 12  DBMS_OUTPUT.PUT_LINE(second_num);
+ 13  FOR i IN 2..N
+ 14  LOOP
+ 15  temp := first_num+second_num;
+ 16  first_num := second_num;
+ 17  second_num := temp;
+ 18  DBMS_OUTPUT.PUT_LINE(temp);
+ 19  END LOOP;
+ 20* END;
+SQL_CSE-575>DECLARE
+  2  first_num NUMBER:=0;
+  3  second_num NUMBER:=1;
+  4  n NUMBER;
+  5  i NUMBER;
+  6  temp NUMBER;
+  7  BEGIN
+  8  n:=&n;
+  9  DBMS_OUTPUT.PUT_LINE('SERIES :');
+ 10  DBMS_OUTPUT.PUT_LINE(first_num);
+ 11  DBMS_OUTPUT.PUT_LINE(second_num);
+ 12  FOR i IN 2..N
+ 13  LOOP
+ 14  temp := first_num+second_num;
+ 15  first_num := second_num;
+ 16  second_num := temp;
+ 17  DBMS_OUTPUT.PUT_LINE(temp);
+ 18  END LOOP;
+ 19  END;
+ 20  /
+Enter value for n: 4
+SERIES :                                                                                            
+0                                                                                                   
+1                                                                                                   
+1                                                                                                   
+2                                                                                                   
+3                                                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL_CSE-575>/
+Enter value for n: 3
+SERIES :                                                                                            
+0                                                                                                   
+1                                                                                                   
+1                                                                                                   
+2                                                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL_CSE-575>/
+Enter value for n: 5
+SERIES :                                                                                            
+0                                                                                                   
+1                                                                                                   
+1                                                                                                   
+2                                                                                                   
+3                                                                                                   
+5                                                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL_CSE-575>SPOOL OFF
