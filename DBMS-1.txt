@@ -1,0 +1,109 @@
+SQL-CSE575>CREATE TABLE parts(
+  2  part_id NUMBER PRIMARY KEY,
+  3  part_name VARCHAR2(50) NOT NULL,
+  4  unique_code VARCHAR2(20) NOT NULL,
+  5  manufactured_date DATE NOT NULL,
+  6  cost NUMBER(10,2) NOT NULL
+  7  );
+
+Table created.
+
+SQL-CSE575>DESC parts;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PART_ID                                   NOT NULL NUMBER
+ PART_NAME                                 NOT NULL VARCHAR2(50)
+ UNIQUE_CODE                               NOT NULL VARCHAR2(20)
+ MANUFACTURED_DATE                         NOT NULL DATE
+ COST                                      NOT NULL NUMBER(10,2)
+
+SQL-CSE575>ALTER TABLE parts
+  2  ADD quantity NUMBER NOT NULL;
+
+Table altered.
+
+SQL-CSE575>DESC parts;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PART_ID                                   NOT NULL NUMBER
+ PART_NAME                                 NOT NULL VARCHAR2(50)
+ UNIQUE_CODE                               NOT NULL VARCHAR2(20)
+ MANUFACTURED_DATE                         NOT NULL DATE
+ COST                                      NOT NULL NUMBER(10,2)
+ QUANTITY                                  NOT NULL NUMBER
+
+SQL-CSE575>ALTER TABLE parts
+  2  MODIFY manufactured_date DATE;
+
+Table altered.
+
+SQL-CSE575>DESC parts;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PART_ID                                   NOT NULL NUMBER
+ PART_NAME                                 NOT NULL VARCHAR2(50)
+ UNIQUE_CODE                               NOT NULL VARCHAR2(20)
+ MANUFACTURED_DATE                         NOT NULL DATE
+ COST                                      NOT NULL NUMBER(10,2)
+ QUANTITY                                  NOT NULL NUMBER
+
+SQL-CSE575>ALTER TABLE parts
+  2  DROP COLUMN manufactured_date;
+
+Table altered.
+
+SQL-CSE575>DESC parts;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PART_ID                                   NOT NULL NUMBER
+ PART_NAME                                 NOT NULL VARCHAR2(50)
+ UNIQUE_CODE                               NOT NULL VARCHAR2(20)
+ COST                                      NOT NULL NUMBER(10,2)
+ QUANTITY                                  NOT NULL NUMBER
+
+SQL-CSE575>CREATE TABLE boats(
+  2  boat_id NUMBER PRIMARY KEY,
+  3  boat_name VARCHAR2(50) NOT NULL
+  4  );
+
+Table created.
+
+SQL-CSE575>DROP TABLE boats;
+
+Table dropped.
+
+SQL-CSE575>DESC boats;
+ERROR:
+ORA-04043: object boats does not exist 
+
+
+SQL-CSE575>INSERT INTO parts VALUES (101,'XAT','XHJ45689023K',999.89,98);
+
+1 row created.
+
+SQL-CSE575>select * from PARTS;
+
+   PART_ID PART_NAME                                                            
+---------- --------------------------------------------------                   
+UNIQUE_CODE                COST   QUANTITY                                      
+-------------------- ---------- ----------                                      
+       101 XAT                                                                  
+XHJ45689023K             999.89         98                                      
+                                                                                
+
+SQL-CSE575>set lin200;
+SQL-CSE575>select * from PARTS;
+
+   PART_ID PART_NAME                                          UNIQUE_CODE                COST   QUANTITY                                                                                                
+---------- -------------------------------------------------- -------------------- ---------- ----------                                                                                                
+       101 XAT                                                XHJ45689023K             999.89         98                                                                                                
+
+SQL-CSE575>TRUNCATE TABLE parts;
+
+Table truncated.
+
+SQL-CSE575>select * from PARTS;
+
+no rows selected
+
+SQL-CSE575>SPOOL OFF
