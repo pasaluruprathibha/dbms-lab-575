@@ -1,0 +1,96 @@
+SQL-CSE575>CREATE TABLE student(
+  2  roll_no NUMBER PRIMARY KEY,
+  3  name VARCHAR2(50) NOT NULL,
+  4  dept_name VARCHAR2(10) NOT NULL
+  5  );
+
+Table created.
+
+SQL-CSE575>CREATE TABLE blocks(
+  2  dept_name VARCHAR2(10) PRIMARY KEY,
+  3  bolck_name VARCHAR2(20) NOT NULL
+  4  );
+
+Table created.
+
+SQL-CSE575>INSERT ALL
+  2  INTO student VALUES (505,'Aravind','CSE')
+  3  INTO student VALUES (411,'Rani','EEE')
+  4  INTO student VALUES (310,'Raju','ECE')
+  5  INTO student VALUES (509,'Baba','CSM')
+  6  INTO blocks VALUES ('CSE','C-BLOCK')
+  7  INTO blocks VALUES ('CSM','B-BLOCK')
+  8  INTO blocks VALUES ('EEE','A-BLOCK')
+  9  SELECT * FROM dual;
+
+7 rows created.
+
+SQL-CSE575>SELECT * FROM student;
+
+   ROLL_NO NAME                                               DEPT_NAME                                                                                                                                 
+---------- -------------------------------------------------- ----------                                                                                                                                
+       505 Aravind                                            CSE                                                                                                                                       
+       411 Rani                                               EEE                                                                                                                                       
+       310 Raju                                               ECE                                                                                                                                       
+       509 Baba                                               CSM                                                                                                                                       
+
+SQL-CSE575>SELECT * FROM blocks;
+
+DEPT_NAME  BOLCK_NAME                                                                                                                                                                                   
+---------- --------------------                                                                                                                                                                         
+CSE        C-BLOCK                                                                                                                                                                                      
+CSM        B-BLOCK                                                                                                                                                                                      
+EEE        A-BLOCK                                                                                                                                                                                      
+
+SQL-CSE575>SELECT * FROM student
+  2  JOIN blocks ON
+  3  student.dept_name=blocks.dept_name;
+
+   ROLL_NO NAME                                               DEPT_NAME  DEPT_NAME  BOLCK_NAME                                                                                                          
+---------- -------------------------------------------------- ---------- ---------- --------------------                                                                                                
+       505 Aravind                                            CSE        CSE        C-BLOCK                                                                                                             
+       411 Rani                                               EEE        EEE        A-BLOCK                                                                                                             
+       509 Baba                                               CSM        CSM        B-BLOCK                                                                                                             
+
+SQL-CSE575>SELECT * FROM student JOIN blocks
+  2  USING(dept_name);
+
+DEPT_NAME     ROLL_NO NAME                                               BOLCK_NAME                                                                                                                     
+---------- ---------- -------------------------------------------------- --------------------                                                                                                           
+CSE               505 Aravind                                            C-BLOCK                                                                                                                        
+EEE               411 Rani                                               A-BLOCK                                                                                                                        
+CSM               509 Baba                                               B-BLOCK                                                                                                                        
+
+SQL-CSE575>SELECT * FROM student
+  2  LEFT OUTER JOIN blocks ON
+  3  student.dept_name=blocks.dept_name;
+
+   ROLL_NO NAME                                               DEPT_NAME  DEPT_NAME  BOLCK_NAME                                                                                                          
+---------- -------------------------------------------------- ---------- ---------- --------------------                                                                                                
+       505 Aravind                                            CSE        CSE        C-BLOCK                                                                                                             
+       411 Rani                                               EEE        EEE        A-BLOCK                                                                                                             
+       310 Raju                                               ECE                                                                                                                                       
+       509 Baba                                               CSM        CSM        B-BLOCK                                                                                                             
+
+SQL-CSE575>SELECT * FROM student
+  2  RIGHT OUTER JOIN blocks ON
+  3  student.dept_name=blocks.dept_name;
+
+   ROLL_NO NAME                                               DEPT_NAME  DEPT_NAME  BOLCK_NAME                                                                                                          
+---------- -------------------------------------------------- ---------- ---------- --------------------                                                                                                
+       505 Aravind                                            CSE        CSE        C-BLOCK                                                                                                             
+       411 Rani                                               EEE        EEE        A-BLOCK                                                                                                             
+       509 Baba                                               CSM        CSM        B-BLOCK                                                                                                             
+
+SQL-CSE575>SELECT * FROM student
+  2  FULL OUTER JOIN blocks
+  3  ON student.dept_name=blocks.dept_name;
+
+   ROLL_NO NAME                                               DEPT_NAME  DEPT_NAME  BOLCK_NAME                                                                                                          
+---------- -------------------------------------------------- ---------- ---------- --------------------                                                                                                
+       505 Aravind                                            CSE        CSE        C-BLOCK                                                                                                             
+       411 Rani                                               EEE        EEE        A-BLOCK                                                                                                             
+       310 Raju                                               ECE                                                                                                                                       
+       509 Baba                                               CSM        CSM        B-BLOCK                                                                                                             
+
+SQL-CSE575>SPOOL OFF
