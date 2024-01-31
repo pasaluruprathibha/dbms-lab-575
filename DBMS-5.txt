@@ -1,0 +1,95 @@
+SQL-CSE575>CREATE TABLE insructors(
+  2  id NUMBER PRIMARY KEY,
+  3  name VARCHAR2(50) NOT NULL,
+  4  salary NUMBER
+  5  );
+
+Table created.
+
+SQL-CSE575>CREATE TABLE departments(
+  2  id NUMBER PRIMARY KEY,
+  3  dept_name VARCHAR2(50)
+  4  );
+
+Table created.
+
+SQL-CSE575>INSERT ALL
+  2  INTO insructors VALUES (1,'Ram',70000)
+  3  INTO insructors VALUES (2,'Sham',null)
+  4  INTO insructors VALUES (3,'Venkat',30000)
+  5  INTO departments VALUES (1,'CSE')
+  6  INTO departments VALUES (2,'EEE')
+  7  INTO departments VALUES (3,'CSM')
+  8  SELECT * FROM dual;
+
+6 rows created.
+
+SQL-CSE575>SELECT * FROM insructors;
+
+        ID NAME                                                   SALARY                                                                                                                                
+---------- -------------------------------------------------- ----------                                                                                                                                
+         1 Ram                                                     70000                                                                                                                                
+         2 Sham                                                                                                                                                                                         
+         3 Venkat                                                  30000                                                                                                                                
+
+SQL-CSE575>SELECT * FROM department;
+
+    DEP_ID DEP_NAME   BUILDING       BUDGET                                                                                                                                                             
+---------- ---------- ---------- ----------                                                                                                                                                             
+         1 cse        gandhi        3500000                                                                                                                                                             
+         2 csm        b_block       1000000                                                                                                                                                             
+         3 ECE        d_block       1500000                                                                                                                                                             
+         4 EEE        c_block       2000000                                                                                                                                                             
+
+SQL-CSE575>SELECT * FROM insructors
+  2  WHERE
+  3  salary IS NULL;
+
+        ID NAME                                                   SALARY                                                                                                                                
+---------- -------------------------------------------------- ----------                                                                                                                                
+         2 Sham                                                                                                                                                                                         
+
+SQL-CSE575>SELECT * FROM insructors
+  2  WHERE
+  3  salary BETWEEN 10000 AND 80000;
+
+        ID NAME                                                   SALARY                                                                                                                                
+---------- -------------------------------------------------- ----------                                                                                                                                
+         1 Ram                                                     70000                                                                                                                                
+         3 Venkat                                                  30000                                                                                                                                
+
+SQL-CSE575>SELECT * FROM insructors
+  2  WHERE
+  3  name LIKE 'R%';
+
+        ID NAME                                                   SALARY                                                                                                                                
+---------- -------------------------------------------------- ----------                                                                                                                                
+         1 Ram                                                     70000                                                                                                                                
+
+SQL-CSE575>SELECT * FROM insructors
+  2  WHERE
+  3  name LIKE '___';
+
+        ID NAME                                                   SALARY                                                                                                                                
+---------- -------------------------------------------------- ----------                                                                                                                                
+         1 Ram                                                     70000                                                                                                                                
+
+SQL-CSE575>SELECT * FROM insructors
+  2  WHERE
+  3  salary IN(10000,30000,20000);
+
+        ID NAME                                                   SALARY                                                                                                                                
+---------- -------------------------------------------------- ----------                                                                                                                                
+         3 Venkat                                                  30000                                                                                                                                
+
+SQL-CSE575>SELECT * FROM insructors
+  2  WHERE
+  3  EXISTS(SELECT * FROM departments WHERE insructors.id=departments.id);
+
+        ID NAME                                                   SALARY                                                                                                                                
+---------- -------------------------------------------------- ----------                                                                                                                                
+         1 Ram                                                     70000                                                                                                                                
+         2 Sham                                                                                                                                                                                         
+         3 Venkat                                                  30000                                                                                                                                
+
+SQL-CSE575>SPOOL OFF
