@@ -1,0 +1,213 @@
+SQL-CSE575>CREATE TABLE instructor(
+  2  ins_id NUMBER(10) PRIMARY KEY,
+  3  ins_name VARCHAR2(25) NOT NULL,
+  4  dep_name VARCHAR2(10) NOT NULL,
+  5  salary NUMBER(10,0)
+  6  );
+
+Table created.
+
+SQL-CSE575>CREATE TABLE department(
+  2  dep_id NUMBER(10) PRIMARY KEY,
+  3  dep_name VARCHAR2(10) NOT NULL,
+  4  building VARCHAR2(10) NOT NULL,
+  5  budget NUMBER(10)
+  6  );
+
+Table created.
+
+SQL-CSE575>INSERT ALL
+  2  INTO instructor VALUES (1,'Suresh','cse',40000)
+  3  INTO instructor VALUES (2,'Mahesh','csd',37000)
+  4  INTO instructor VALUES (3,'Aravind','csm',20000)
+  5  INTO instructor VALUES (4,'Jagadeesh','cse',50000)
+  6  INTO instructor VALUES (5,'Raju','physics',20000)
+  7  INTO instructor VALUES (6,'Somesh','EEE',30000)
+  8  INTO instructor VALUES (7,'Ravi','civil',35000)
+  9  INTO department VALUES (1,'cse','gandhi',3500000)
+ 10  INTO department VALUES (2,'csm','b_block',1000000)
+ 11  INTO department VALUES (3,'ECE','d_block',1500000)
+ 12  INTO department VALUES (4,'EEE','c_block',2000000)
+ 13  SELECT * FROM dual;
+
+11 rows created.
+
+SQL-CSE575>SELECT * FROM INSTRUCTOR;
+
+    INS_ID INS_NAME                  DEP_NAME       SALARY                                                                                                                                              
+---------- ------------------------- ---------- ----------                                                                                                                                              
+         1 Suresh                    cse             40000                                                                                                                                              
+         2 Mahesh                    csd             37000                                                                                                                                              
+         3 Aravind                   csm             20000                                                                                                                                              
+         4 Jagadeesh                 cse             50000                                                                                                                                              
+         5 Raju                      physics         20000                                                                                                                                              
+         6 Somesh                    EEE             30000                                                                                                                                              
+         7 Ravi                      civil           35000                                                                                                                                              
+
+7 rows selected.
+
+SQL-CSE575>SELECT * FROM department;
+
+    DEP_ID DEP_NAME   BUILDING       BUDGET                                                                                                                                                             
+---------- ---------- ---------- ----------                                                                                                                                                             
+         1 cse        gandhi        3500000                                                                                                                                                             
+         2 csm        b_block       1000000                                                                                                                                                             
+         3 ECE        d_block       1500000                                                                                                                                                             
+         4 EEE        c_block       2000000                                                                                                                                                             
+
+SQL-CSE575>SELECT dep_name FROM instructor
+  2  UNION
+  3  SELECT dep_name FROM department;
+
+DEP_NAME                                                                                                                                                                                                
+----------                                                                                                                                                                                              
+cse                                                                                                                                                                                                     
+csd                                                                                                                                                                                                     
+csm                                                                                                                                                                                                     
+physics                                                                                                                                                                                                 
+EEE                                                                                                                                                                                                     
+civil                                                                                                                                                                                                   
+ECE                                                                                                                                                                                                     
+
+7 rows selected.
+
+SQL-CSE575>SELECT dep_name FROM instructor
+  2  UNION ALL
+  3  SELECT dep_name FROM department;
+
+DEP_NAME                                                                                                                                                                                                
+----------                                                                                                                                                                                              
+cse                                                                                                                                                                                                     
+csd                                                                                                                                                                                                     
+csm                                                                                                                                                                                                     
+cse                                                                                                                                                                                                     
+physics                                                                                                                                                                                                 
+EEE                                                                                                                                                                                                     
+civil                                                                                                                                                                                                   
+cse                                                                                                                                                                                                     
+csm                                                                                                                                                                                                     
+ECE                                                                                                                                                                                                     
+EEE                                                                                                                                                                                                     
+
+11 rows selected.
+
+SQL-CSE575>SELECT dep_name FROM instructor
+  2  INTERSECT
+  3  SELECT dep_name FROM department;
+
+DEP_NAME                                                                                                                                                                                                
+----------                                                                                                                                                                                              
+cse                                                                                                                                                                                                     
+csm                                                                                                                                                                                                     
+EEE                                                                                                                                                                                                     
+
+SQL-CSE575>SELECT dep_name FROM instructor
+  2  MINUS
+  3  SELECT dep_name FROM department;
+
+DEP_NAME                                                                                                                                                                                                
+----------                                                                                                                                                                                              
+csd                                                                                                                                                                                                     
+physics                                                                                                                                                                                                 
+civil                                                                                                                                                                                                   
+
+SQL-CSE575> SELECT dep_name FROM department
+  2  MINUS
+  3  SELECT dep_name FROM instructor;
+
+DEP_NAME                                                                                                                                                                                                
+----------                                                                                                                                                                                              
+ECE                                                                                                                                                                                                     
+
+SQL-CSE575>SELECT i.ins_name,d.dep_name,d.budget FROM instructor i,department d;
+
+INS_NAME                  DEP_NAME       BUDGET                                                                                                                                                         
+------------------------- ---------- ----------                                                                                                                                                         
+Suresh                    cse           3500000                                                                                                                                                         
+Mahesh                    cse           3500000                                                                                                                                                         
+Aravind                   cse           3500000                                                                                                                                                         
+Jagadeesh                 cse           3500000                                                                                                                                                         
+Raju                      cse           3500000                                                                                                                                                         
+Somesh                    cse           3500000                                                                                                                                                         
+Ravi                      cse           3500000                                                                                                                                                         
+Suresh                    csm           1000000                                                                                                                                                         
+Mahesh                    csm           1000000                                                                                                                                                         
+Aravind                   csm           1000000                                                                                                                                                         
+Jagadeesh                 csm           1000000                                                                                                                                                         
+
+INS_NAME                  DEP_NAME       BUDGET                                                                                                                                                         
+------------------------- ---------- ----------                                                                                                                                                         
+Raju                      csm           1000000                                                                                                                                                         
+Somesh                    csm           1000000                                                                                                                                                         
+Ravi                      csm           1000000                                                                                                                                                         
+Suresh                    ECE           1500000                                                                                                                                                         
+Mahesh                    ECE           1500000                                                                                                                                                         
+Aravind                   ECE           1500000                                                                                                                                                         
+Jagadeesh                 ECE           1500000                                                                                                                                                         
+Raju                      ECE           1500000                                                                                                                                                         
+Somesh                    ECE           1500000                                                                                                                                                         
+Ravi                      ECE           1500000                                                                                                                                                         
+Suresh                    EEE           2000000                                                                                                                                                         
+
+INS_NAME                  DEP_NAME       BUDGET                                                                                                                                                         
+------------------------- ---------- ----------                                                                                                                                                         
+Mahesh                    EEE           2000000                                                                                                                                                         
+Aravind                   EEE           2000000                                                                                                                                                         
+Jagadeesh                 EEE           2000000                                                                                                                                                         
+Raju                      EEE           2000000                                                                                                                                                         
+Somesh                    EEE           2000000                                                                                                                                                         
+Ravi                      EEE           2000000                                                                                                                                                         
+
+28 rows selected.
+
+SQL-CSE575>SELECT i.ins_name,d.dep_name,d.budget FROM instructor i CROSS JOIN department d;
+
+INS_NAME                  DEP_NAME       BUDGET                                                                                                                                                         
+------------------------- ---------- ----------                                                                                                                                                         
+Suresh                    cse           3500000                                                                                                                                                         
+Mahesh                    cse           3500000                                                                                                                                                         
+Aravind                   cse           3500000                                                                                                                                                         
+Jagadeesh                 cse           3500000                                                                                                                                                         
+Raju                      cse           3500000                                                                                                                                                         
+Somesh                    cse           3500000                                                                                                                                                         
+Ravi                      cse           3500000                                                                                                                                                         
+Suresh                    csm           1000000                                                                                                                                                         
+Mahesh                    csm           1000000                                                                                                                                                         
+Aravind                   csm           1000000                                                                                                                                                         
+Jagadeesh                 csm           1000000                                                                                                                                                         
+
+INS_NAME                  DEP_NAME       BUDGET                                                                                                                                                         
+------------------------- ---------- ----------                                                                                                                                                         
+Raju                      csm           1000000                                                                                                                                                         
+Somesh                    csm           1000000                                                                                                                                                         
+Ravi                      csm           1000000                                                                                                                                                         
+Suresh                    ECE           1500000                                                                                                                                                         
+Mahesh                    ECE           1500000                                                                                                                                                         
+Aravind                   ECE           1500000                                                                                                                                                         
+Jagadeesh                 ECE           1500000                                                                                                                                                         
+Raju                      ECE           1500000                                                                                                                                                         
+Somesh                    ECE           1500000                                                                                                                                                         
+Ravi                      ECE           1500000                                                                                                                                                         
+Suresh                    EEE           2000000                                                                                                                                                         
+
+INS_NAME                  DEP_NAME       BUDGET                                                                                                                                                         
+------------------------- ---------- ----------                                                                                                                                                         
+Mahesh                    EEE           2000000                                                                                                                                                         
+Aravind                   EEE           2000000                                                                                                                                                         
+Jagadeesh                 EEE           2000000                                                                                                                                                         
+Raju                      EEE           2000000                                                                                                                                                         
+Somesh                    EEE           2000000                                                                                                                                                         
+Ravi                      EEE           2000000                                                                                                                                                         
+
+28 rows selected.
+
+SQL-CSE575>SELECT i.ins_name,dep_name,d.budget FROM instructor i NATURAL JOIN department d;
+
+INS_NAME                  DEP_NAME       BUDGET                                                                                                                                                         
+------------------------- ---------- ----------                                                                                                                                                         
+Suresh                    cse           3500000                                                                                                                                                         
+Aravind                   csm           1000000                                                                                                                                                         
+Jagadeesh                 cse           3500000                                                                                                                                                         
+Somesh                    EEE           2000000                                                                                                                                                         
+
+SQL-CSE575>SPOOL OFF

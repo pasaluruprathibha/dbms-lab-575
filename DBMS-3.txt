@@ -1,0 +1,162 @@
+SQL-CSE575>CREATE TABLE students(
+  2  ID NUMBER(10) PRIMARY KEY,
+  3  name VARCHAR2(50) ,
+  4  gender CHAR,
+  5  mobile_no NUMBER(10),
+  6  dept VARCHAR2(5)
+  7  );
+
+Table created.
+
+SQL-CSE575>DESC students
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ ID                                                                                                                NOT NULL NUMBER(10)
+ NAME                                                                                                                       VARCHAR2(50)
+ GENDER                                                                                                                     CHAR(1)
+ MOBILE_NO                                                                                                                  NUMBER(10)
+ DEPT                                                                                                                       VARCHAR2(5)
+
+SQL-CSE575>DESC students;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ ID                                                                                                                NOT NULL NUMBER(10)
+ NAME                                                                                                                       VARCHAR2(50)
+ GENDER                                                                                                                     CHAR(1)
+ MOBILE_NO                                                                                                                  NUMBER(10)
+ DEPT                                                                                                                       VARCHAR2(5)
+
+SQL-CSE575>DESC students;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ ID                                                                                                                NOT NULL NUMBER(10)
+ NAME                                                                                                                       VARCHAR2(50)
+ GENDER                                                                                                                     CHAR(1)
+ MOBILE_NO                                                                                                                  NUMBER(10)
+ DEPT                                                                                                                       VARCHAR2(5)
+
+SQL-CSE575>INSERT ALL
+  2   INTO students VALUES (510,'Raju','M',7648982567,'CSE')
+  3   INTO students VALUES (339,'Suresh','M',7839265709,'CSM')
+  4   INTO students VALUES (289,'Krishna','M',6289106653,'EEE')
+  5  INTO students VALUES (501,'Alex','M',9286470178,'CSE')
+  6  INTO students VALUES (145,'Harsha','M',7459026841,'ECE')
+  7  INTO students VALUES (505,'Aravind','M',8468464937,'CSE')
+  8  SELECT * FROM DUAL;
+
+6 rows created.
+
+SQL-CSE575>SELECT * FROM students;
+
+        ID NAME                                               G  MOBILE_NO DEPT                                                                                                                         
+---------- -------------------------------------------------- - ---------- -----                                                                                                                        
+       510 Raju                                               M 7648982567 CSE                                                                                                                          
+       339 Suresh                                             M 7839265709 CSM                                                                                                                          
+       289 Krishna                                            M 6289106653 EEE                                                                                                                          
+       501 Alex                                               M 9286470178 CSE                                                                                                                          
+       145 Harsha                                             M 7459026841 ECE                                                                                                                          
+       505 Aravind                                            M 8468464937 CSE                                                                                                                          
+
+6 rows selected.
+
+SQL-CSE575>CREATE VIEW std AS SELECT id,name,dept FROM students;
+
+View created.
+
+SQL-CSE575>CREATE VIEW cse_std AS SELECT id,name,gender,dept FROM students WHERE dept='CSE';
+
+View created.
+
+SQL-CSE575> SELECT * FROM cse_std;
+
+        ID NAME                                               G DEPT                                                                                                                                    
+---------- -------------------------------------------------- - -----                                                                                                                                   
+       510 Raju                                               M CSE                                                                                                                                     
+       501 Alex                                               M CSE                                                                                                                                     
+       505 Aravind                                            M CSE                                                                                                                                     
+
+SQL-CSE575>SELECT * FROM std;
+
+        ID NAME                                               DEPT                                                                                                                                      
+---------- -------------------------------------------------- -----                                                                                                                                     
+       510 Raju                                               CSE                                                                                                                                       
+       339 Suresh                                             CSM                                                                                                                                       
+       289 Krishna                                            EEE                                                                                                                                       
+       501 Alex                                               CSE                                                                                                                                       
+       145 Harsha                                             ECE                                                                                                                                       
+       505 Aravind                                            CSE                                                                                                                                       
+
+6 rows selected.
+
+SQL-CSE575>INSERT INTO std VALUES (509,'Baba','CSE');
+
+1 row created.
+
+SQL-CSE575>SELECT * FROM cse_std;
+
+        ID NAME                                               G DEPT                                                                                                                                    
+---------- -------------------------------------------------- - -----                                                                                                                                   
+       510 Raju                                               M CSE                                                                                                                                     
+       501 Alex                                               M CSE                                                                                                                                     
+       505 Aravind                                            M CSE                                                                                                                                     
+       509 Baba                                                 CSE                                                                                                                                     
+
+SQL-CSE575>UPDATE cse_std SET name='Balaji' WHERE ID=510;
+
+1 row updated.
+
+SQL-CSE575>SELECT * FROM cse_std;
+
+        ID NAME                                               G DEPT                                                                                                                                    
+---------- -------------------------------------------------- - -----                                                                                                                                   
+       510 Balaji                                             M CSE                                                                                                                                     
+       501 Alex                                               M CSE                                                                                                                                     
+       505 Aravind                                            M CSE                                                                                                                                     
+       509 Baba                                                 CSE                                                                                                                                     
+
+SQL-CSE575>DELETE FROM cse_std WHERE id=501;
+
+1 row deleted.
+
+SQL-CSE575>DELETE FROM cse_std WHERE id=501;
+
+0 rows deleted.
+
+SQL-CSE575>SELECT * FROM cse_std;
+
+        ID NAME                                               G DEPT                                                                                                                                    
+---------- -------------------------------------------------- - -----                                                                                                                                   
+       510 Balaji                                             M CSE                                                                                                                                     
+       505 Aravind                                            M CSE                                                                                                                                     
+       509 Baba                                                 CSE                                                                                                                                     
+
+SQL-CSE575>CREATE VIEW eee_std AS SELECT ID,NAME,mobile_no FROM students WHERE dept='EEE';
+
+View created.
+
+SQL-CSE575>SELECT * FROM eee_std;
+
+        ID NAME                                                MOBILE_NO                                                                                                                                
+---------- -------------------------------------------------- ----------                                                                                                                                
+       289 Krishna                                            6289106653                                                                                                                                
+
+SQL-CSE575> DELETE FROM eee_std;
+
+1 row deleted.
+
+SQL-CSE575>SELECT * FROM eee_std;
+
+no rows selected
+
+SQL-CSE575>DROP VIEW eee_std;
+
+View dropped.
+
+SQL-CSE575>SELECT * FROM eee_std;
+SELECT * FROM eee_std
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL-CSE575>Spool off
