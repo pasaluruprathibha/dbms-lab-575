@@ -1,0 +1,34 @@
+SQL_CSE-575>SET SERVEROUT ON
+SQL_CSE-575>SET VERIFY OFF
+SQL_CSE-575>DECLARE
+  2  n NUMBER;
+  3  fac NUMBER:=1;
+  4  n1 NUMBER;
+  5  BEGIN
+  6  n:=&n;
+  7  n1:=n;
+  8  WHILE n1>0 LOOP
+  9  fac := n1*fac;
+ 10  n1:=n1-1;
+ 11  END LOOP;
+ 12  DBMS_OUTPUT.PUT_LINE('The Factorial of '||n||' is '||fac);
+ 13  END;
+ 14  /
+Enter value for n: 3
+The Factorial of 3 is 6                                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL_CSE-575>/
+Enter value for n: 5
+The Factorial of 5 is 120                                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL_CSE-5575>/
+Enter value for n: 99
+The Factorial of 99 is ~                                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL_CSE-575>SPOOL OFF
