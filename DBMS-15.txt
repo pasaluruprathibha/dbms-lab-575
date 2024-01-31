@@ -1,0 +1,64 @@
+SQL_CSE-575>CREATE TABLE instruc(
+  2  id NUMBER PRIMARY KEY,
+  3  name VARCHAR2(50) NOT NULL,
+  4  dept_name VARCHAR2(20) NOT NULL,
+  5  salary NUMBER(10,2) CHECK(salary>10000)
+  6  );
+
+Table created.
+
+SQL_CSE-575>INSERT ALL
+  2  INTO instruc VALUES (1,'Karthik','CSE',50000)
+  3  INTO instruc VALUES (2,'Meghanath','CSM',75000)
+  4  INTO instruc VALUES (3,'Ravi teja','CSE',80000)
+  5  INTO instruc VALUES (4,'Raju','CSD',47000)
+  6  SELECT * FROM dual;
+
+4 rows created.
+
+SQL_CSE-575>CREATE OR REPLACE TRIGGER display_changes
+  2  BEFORE UPDATE ON instruc
+  3  FOR EACH ROW
+  4  WHEN (NEW.ID = OLD.ID)
+  5  DECLARE
+  6  sal_diff number;
+  7  BEGIN
+  8  sal_diff := :NEW.salary - :OLD.salary;
+  9  dbms_output.put_line('Old salary: ' || :OLD.salary);
+ 10  dbms_output.put_line('New salary: ' || :NEW.salary);
+ 11  dbms_output.put_line('Salary difference: ' || sal_diff);
+ 12  END;
+ 13  /
+
+Trigger created.
+
+SQL_CSE-575>DECLARE
+  2  tot_rows NUMBER;
+  3  BEGIN
+  4  UPDATE instruc
+  5  SET salary=salary*1.5;
+  6  IF sql%notfound THEN
+  7  DBMS_OUTPUT.PUT_LINE('no instructors updated');
+  8  ELSIF sql%found THEN
+  9  tot_rows:=sql%rowcount;
+ 10  DBMS_OUTPUT.PUT_LINE(tot_rows||' instructors updated');
+ 11  END IF;
+ 12  END;
+ 13  /
+Old salary: 50000                                                               
+New salary: 75000                                                               
+Salary difference: 25000                                                        
+Old salary: 75000                                                               
+New salary: 112500                                                              
+Salary difference: 37500                                                        
+Old salary: 80000                                                               
+New salary: 120000                                                              
+Salary difference: 40000                                                        
+Old salary: 47000                                                               
+New salary: 70500                                                               
+Salary difference: 23500                                                        
+4 instructors updated                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL_CSE-575>SPOOL OFF
